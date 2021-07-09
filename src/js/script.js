@@ -103,6 +103,10 @@
       thisProduct.priceElem = thisProduct.element.querySelector(
         select.menuProduct.priceElem
       );
+
+      thisProduct.imageWrapper = thisProduct.element.querySelector(
+        select.menuProduct.imageWrapper
+      );
     }
 
     initAccordion() {
@@ -155,11 +159,11 @@
     processOrder() {
       const thisProduct = this;
       console.log('processOrder');
-
+      //What options has been choosen?
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('formData', formData);
 
-      // set price to default price
+      // Default price of the product with default options
       let price = thisProduct.data.price;
 
       // for every category (param)...
@@ -176,19 +180,37 @@
           let optionSelected =
             formData[paramId] && formData[paramId].includes(optionId);
           // check if there is param with a name of paramId in formData and if it includes optionId
+          let optionImg = thisProduct.imageWrapper.querySelector(
+            '.' + paramId + '-' + optionId
+          );
           if (optionSelected) {
+            //find image with class paramId-optionId exists
+
+            console.log('optionImg :', optionImg);
+
+            //Add class active to element with class pramId-optionId
+            if (optionImg) {
+              optionImg.classList.add('active');
+            }
+            //else - remove class active
+
             // check if the option is not default
             if (option.default != true) {
               // add option price to price variable
               price += option.price;
+
               console.log('no-Default price added');
             }
           } else {
+            if (optionImg) {
+              optionImg.classList.remove('active');
+            }
             // check if the option is default
             if (option.default == true) {
               // reduce price variable
               price -= option.price;
-              console.log('Default price added');
+
+              console.log('Default price removed');
             }
           }
         }
