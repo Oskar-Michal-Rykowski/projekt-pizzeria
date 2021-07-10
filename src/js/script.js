@@ -183,41 +183,27 @@
           let optionImg = thisProduct.imageWrapper.querySelector(
             '.' + paramId + '-' + optionId
           );
-          if (optionSelected) {
-            //find image with class paramId-optionId exists
 
-            console.log('optionImg :', optionImg);
-
-            //Add class active to element with class pramId-optionId
-            if (optionImg) {
-              optionImg.classList.add('active');
-            }
-            //else - remove class active
-
-            // check if the option is not default
-            if (option.default != true) {
-              // add option price to price variable
-              price += option.price;
-
-              console.log('no-Default price added');
-            }
+          if (optionSelected && optionImg) {
+            optionImg.classList.add('active');
           } else {
             if (optionImg) {
               optionImg.classList.remove('active');
             }
-            // check if the option is default
-            if (option.default == true) {
-              // reduce price variable
-              price -= option.price;
 
-              console.log('Default price removed');
+            if (optionSelected && option.default != true) {
+              price += option.price;
+            } else {
+              if (option.default == true) {
+                price -= option.price;
+              }
             }
           }
         }
-      }
 
-      // update calculated price in the HTML
-      thisProduct.priceElem.innerHTML = price;
+        // update calculated price in the HTML
+        thisProduct.priceElem.innerHTML = price;
+      }
     }
   }
 
