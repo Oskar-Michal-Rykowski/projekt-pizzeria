@@ -65,6 +65,7 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
+      thisProduct.initAmountWidget();
       thisProduct.processOrder();
 
       //console.log('new Product:', thisProduct);
@@ -106,6 +107,10 @@
 
       thisProduct.imageWrapper = thisProduct.element.querySelector(
         select.menuProduct.imageWrapper
+      );
+
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(
+        select.menuProduct.amountWidget
       );
     }
 
@@ -156,6 +161,13 @@
         //console.log('Process after click');
       });
     }
+
+    initAmountWidget() {
+      const thisProduct = this;
+
+      thisProduct.amounWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
+
     processOrder() {
       const thisProduct = this;
       console.log('processOrder');
@@ -205,12 +217,16 @@
       }
     }
   }
-  /*
+
   class AmountWidget {
     constructor(element) {
       const thisWidget = this;
 
       thisWidget.getElements(element);
+      thisWidget.setValue(
+        thisWidget.input.value || settings.amountWidget.defaultValue
+      );
+      thisWidget.initActions();
 
       console.log('AmountWidget:', thisWidget);
       console.log('construtor arguments', element);
@@ -222,10 +238,17 @@
       const newValue = parseInt(value);
 
       //TODO: Add validation
-      if (thisWidget.value !== newValue) {
+      if (
+        thisWidget.value !== newValue &&
+        !isNaN(newValue) &&
+        newValue >= settings.amountWidget.defaultMin &&
+        newValue <= settings.amountWidget.defaultMax
+      ) {
         thisWidget.value = newValue;
       }
-    } 
+
+      thisWidget.input.value = thisWidget.value;
+    }
 
     getElements(element) {
       const thisWidget = this;
@@ -241,7 +264,25 @@
         select.widgets.amount.linkIncrease
       );
     }
-  }*/
+
+    initActions() {
+      const thisWidget = this;
+
+      thisWidget.input.addEventListener('change', function () {
+        thisWidget.setValue(thisWidget.value);
+      });
+
+      thisWidget.linkDecrease.addEventListener('click', function (event) {
+        event.preventDefault();
+        thisWidget.setValue(--thisWidget.value);
+      });
+
+      thisWidget.linkIncrease.addEventListener('click', function (event) {
+        event.preventDefault();
+        thisWidget.setValue(++thisWidget.value);
+      });
+    }
+  }
 
   const app = {
     initMenu: function () {
