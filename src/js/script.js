@@ -226,23 +226,18 @@
 
       console.log('AmountWidget:', thisWidget);
       console.log('construtor arguments', element);
-
-      setValue(value) {
-        const thisWidget= this;
-
-        const newValue = parseInt(value);
-
-        /*TODO: Add validation */
-        if (newValue && newValue <= 10 && newValue > 0) {
-        thisWidget.value = newValue;
-        thisWidget.input.value = thisWidget.value;
-        
-        } else {}
-      }
-
     }
 
-  
+    setValue(value) {
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      //TODO: Add validation
+      if (thisWidget.value !== newValue) {
+        thisWidget.value = newValue;
+      }
+    }
 
     getElements(element) {
       const thisWidget = this;
