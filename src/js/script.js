@@ -43,8 +43,8 @@
   const settings = {
     amountWidget: {
       defaultValue: 1,
-      defaultMin: 1,
-      defaultMax: 9,
+      defaultMin: 0,
+      defaultMax: 10,
     },
   };
 
@@ -274,12 +274,12 @@
 
       thisWidget.linkDecrease.addEventListener('click', function (event) {
         event.preventDefault();
-        thisWidget.setValue(--thisWidget.value);
+        thisWidget.setValue(thisWidget.value - 1);
       });
 
       thisWidget.linkIncrease.addEventListener('click', function (event) {
         event.preventDefault();
-        thisWidget.setValue(++thisWidget.value);
+        thisWidget.setValue(thisWidget.value + 1);
       });
     }
   }
