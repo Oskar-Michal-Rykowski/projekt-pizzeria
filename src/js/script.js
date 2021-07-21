@@ -262,11 +262,10 @@
           }
         }
       } // multiply price by amount
+      thisProduct.priceSingle = price;
       price *= thisProduct.amountWidget.value;
 
       //Save price for Cart
-
-      thisProduct.priceSingle = price;
 
       // update calculated price in the HTML
       thisProduct.dom.priceElem.innerHTML = price;
@@ -456,6 +455,18 @@
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(
         select.cart.productList
       );
+      thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(
+        select.cart.deliveryFee
+      );
+      thisCart.dom.subTotalPrice = thisCart.dom.wrapper.querySelector(
+        select.cart.subtotalPrice
+      );
+      thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(
+        select.cart.totalPrice
+      );
+      thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(
+        select.cart.totalNumber
+      );
     }
 
     initActions() {
@@ -479,6 +490,44 @@
 
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       //  console.log('thisCart.products', thisCart.products);
+
+      thisCart.update();
+    }
+
+    update() {
+      const thisCart = this;
+
+      //Czemu w zadaniu proszono o stałą?
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
+      thisCart.totalNumber = 0;
+      thisCart.subTotalPrice = 0;
+
+      for (let productCart of thisCart.products) {
+        thisCart.totalNumber += productCart.amount;
+        thisCart.subTotalPrice += productCart.price;
+
+        console.log('product of thisCart.products', productCart);
+      }
+
+      if (thisCart.totalNumber === 0) {
+        thisCart.totalPrice = 0;
+        thisCart.totalPrice = 0;
+      } else {
+        thisCart.totalPrice = thisCart.subTotalPrice + thisCart.deliveryFee;
+
+        for (let price of thisCart.dom.totalPrice) {
+          price.innerHTML = thisCart.totalPrice;
+        }
+      }
+
+      thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
+      thisCart.dom.subTotalPrice.innerHTML = thisCart.subTotalPrice;
+      thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
+      thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
+
+      console.log('thisCart.totalPrice', thisCart.totalPrice);
+      console.log('totalNumber', thisCart.totalNumber);
+      console.log('totalNumber', thisCart.totalNumber);
     }
   }
 
