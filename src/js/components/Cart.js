@@ -115,19 +115,17 @@ class Cart {
 
     if (thisCart.totalNumber === 0) {
       thisCart.totalPrice = 0;
-      thisCart.totalPrice = 0;
     } else {
       thisCart.totalPrice = thisCart.subTotalPrice + thisCart.deliveryFee;
-
-      for (let price of thisCart.dom.totalPrice) {
-        price.innerHTML = thisCart.totalPrice;
-      }
+    }
+    for (let price of thisCart.dom.totalPrice) {
+      price.innerHTML = thisCart.totalPrice;
     }
 
+    thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
     thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
     thisCart.dom.subTotalPrice.innerHTML = thisCart.subTotalPrice;
     thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
-    thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
 
     console.log('thisCart.totalPrice', thisCart.totalPrice);
     console.log('totalNumber', thisCart.totalNumber);
