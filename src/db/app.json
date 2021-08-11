@@ -175,7 +175,7 @@
                       "price":1,
                       "default":true
                    },
-                   "olives":{
+                   "black_olives":{
                       "label":"Olives",
                       "price":1,
                       "default":true
@@ -210,7 +210,7 @@
     "events": [
       {
         "id": 1,
-        "date": "2021-01-01",
+        "date": "2021-08-11",
         "hour": "12:30",
         "table": 1,
         "repeat": false,
@@ -263,13 +263,12 @@
     "bookings": [
       {
          "id": 1,
-         "date": "2021-01-03",
+         "date": "2021-08-11",
          "hour": "16:00",
          "table": 1,
-         "repeat": false,
-         "duration": 4,
-         "ppl": 3,
-         "starters": []
-       },
+         "duration": 3,
+         "ppl": 4,
+         "starters": ["water"]
+       }
     ]
  }

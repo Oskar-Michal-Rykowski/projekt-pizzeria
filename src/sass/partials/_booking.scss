@@ -188,6 +188,9 @@
         opacity: 0.4;
       }
     }
+    &.selected {
+      background: greenyellow;
+    }
   }
 
   [data-table='1'] {
