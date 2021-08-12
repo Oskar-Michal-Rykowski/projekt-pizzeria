@@ -2,7 +2,6 @@ import { settings, select } from '../settings.js';
 import BaseWidget from './BaseWidget.js';
 
 class AmountWidget extends BaseWidget {
-  //jak mają sie argumenty konstruktora klasy pochodnej do konstruktora klasy bazowej?
   constructor(element) {
     super(element, settings.amountWidget.defaultValue);
 
