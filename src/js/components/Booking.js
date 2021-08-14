@@ -204,11 +204,20 @@ class Booking {
     thisBooking.dom.floorPlan = thisBooking.dom.wrapper.querySelector(
       select.booking.tables.split(' ')[0]
     );
+
+    thisBooking.dom.bookingForm = thisBooking.dom.wrapper.querySelector(
+      select.booking.form
+    );
+
+    thisBooking.dom.bookingForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      thisBooking.sendBooking();
+    });
   }
 
   initWidgets() {
     const thisBooking = this;
-
+    // Czemu w niktórych momentach jest dom a w niektórych nie?
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
 
@@ -268,6 +277,79 @@ class Booking {
       }
     }
     console.log('thisBooking.slectedTable', thisBooking.slectedTable);
+  }
+
+  sendBooking() {
+    // debugger;
+    const thisBooking = this;
+
+    thisBooking.dom.date = thisBooking.dom.wrapper.querySelector(
+      select.widgets.datePicker.input
+    );
+    thisBooking.dom.hour = thisBooking.dom.wrapper.querySelector(
+      select.widgets.hourPicker.input
+    );
+
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(
+      select.cart.phone
+    );
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(
+      select.cart.address
+    );
+
+    thisBooking.dom.startersOpitions = thisBooking.dom.wrapper.querySelectorAll(
+      select.booking.startersOpitions
+    );
+    console.log(
+      'thisBooking.dom.startersOpitions',
+      thisBooking.dom.startersOpitions
+    );
+
+    const url = settings.db.url + '/' + settings.db.booking;
+
+    const payload = {
+      data: thisBooking.datePicker.value, // DONE
+      hour: thisBooking.hourPicker.value, // DONE
+      table: Number(thisBooking.slectedTable), // DONE
+      duration: thisBooking.hoursAmount.value, // DONE
+      ppl: thisBooking.peopleAmount.value, // DONE
+      starters: [],
+      phone: thisBooking.dom.phone.value, // DONE
+      address: thisBooking.dom.address.value, // DONE
+    };
+
+    for (let option of thisBooking.dom.startersOpitions) {
+      if (option.checked) {
+        payload.starters.push(option.defaultValue);
+      }
+    }
+    console.log('url', url);
+    console.log('payload', payload);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (parsedResponse) {
+        console.log('parsedResponse', parsedResponse);
+      })
+      .then(
+        thisBooking.makeBooked(
+          payload.data,
+          payload.hour,
+          payload.duration,
+          payload.table
+        )
+      );
+    console.log('thisBooking.booked', thisBooking.booked);
   }
 }
 
