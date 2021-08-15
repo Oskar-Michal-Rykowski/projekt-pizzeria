@@ -1,23 +1,25 @@
-// import { templates } from '../settings';
+import { templates } from '../settings';
 
-// class Home {
-//   constructor() {
-//     const thisHome = this;
+class Home {
+  constructor(element) {
+    const thisHome = this;
 
-//     thisHome.render();
-//     thisHome.initWidget();
-//   }
-//   render() {
-//     const thisHome = this;
+    thisHome.render(element);
+    thisHome.initWidget();
+  }
+  render(element) {
+    const thisHome = this;
 
-//     const generatedHTML = templates.home();
+    const generatedHTML = templates.home();
 
-//     thisHome.dom = {};
-//   }
+    thisHome.dom = {};
+    thisHome.dom.wrapper = element;
+    thisHome.dom.wrapper.innerHTML = generatedHTML;
+  }
 
-//   initWidget() {
-//     const thisHome = this;
-//   }
-// }
+  initWidget() {
+    // const thisHome = this;
+  }
+}
 
-// export default Home;
+export default Home;
