@@ -145,7 +145,7 @@ export const templates = {
     document.querySelector(select.templateOf.bookingWidget).innerHTML
   ),
 
-  home: Handlebars.compile(
-    document.querySelector(select.templateOf.home).innerHTML
-  ),
+  // home: Handlebars.compile(
+  //   document.querySelector(select.templateOf.home).innerHTML
+  // ),
 };

@@ -308,7 +308,7 @@ class Booking {
     const url = settings.db.url + '/' + settings.db.booking;
 
     const payload = {
-      data: thisBooking.datePicker.value, // DONE
+      date: thisBooking.datePicker.value, // DONE
       hour: thisBooking.hourPicker.value, // DONE
       table: Number(thisBooking.slectedTable), // DONE
       duration: thisBooking.hoursAmount.value, // DONE
@@ -343,7 +343,7 @@ class Booking {
       })
       .then(
         thisBooking.makeBooked(
-          payload.data,
+          payload.date,
           payload.hour,
           payload.duration,
           payload.table
