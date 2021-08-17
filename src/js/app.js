@@ -8,8 +8,8 @@ const app = {
   initHome: function () {
     const thisApp = this;
 
-    const home = document.querySelector(select.containerOf.home);
-    thisApp.homePage = new Home(home);
+    const homeContainer = document.querySelector(select.containerOf.home);
+    thisApp.homePage = new Home(homeContainer);
   },
 
   initBooking: function () {
