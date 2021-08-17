@@ -18,7 +18,15 @@ class Home {
   }
 
   initWidget() {
-    // const thisHome = this;
+    const thisHome = this;
+    const carouselWrapper = thisHome.dom.wrapper.querySelector('.my-carousel');
+    // eslint-disable-next-line no-undef
+    thisHome.dom.carousel = new Flickity(carouselWrapper, {
+      // options
+      cellAlign: 'left',
+      contain: true,
+      autoPlay: true,
+    });
   }
 }
 

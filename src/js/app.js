@@ -4,12 +4,28 @@ import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
 import Home from './components/Home.js';
 
-const app = {
+export const app = {
   initHome: function () {
     const thisApp = this;
 
     const homeContainer = document.querySelector(select.containerOf.home);
     thisApp.homePage = new Home(homeContainer);
+
+    const buttons = document.querySelectorAll('.pattern-box');
+    for (let button of buttons) {
+      button.addEventListener('click', function (event) {
+        const clickedElement = this;
+        event.preventDefault();
+
+        //get page id from href attribute
+        const id = clickedElement.getAttribute('href').replace('#', '');
+        //run thisApp.activatePage with that id
+        thisApp.activatePage(id);
+
+        // change URL hash
+        window.location.hash = '#/' + id;
+      });
+    }
   },
 
   initBooking: function () {
