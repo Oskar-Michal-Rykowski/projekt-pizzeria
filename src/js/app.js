@@ -122,6 +122,8 @@ const app = {
     thisApp.initPages();
 
     thisApp.initBooking();
+
+    thisApp.initHome();
   },
 
   initCart: function () {
