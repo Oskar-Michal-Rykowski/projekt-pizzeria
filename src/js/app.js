@@ -17,12 +17,10 @@ export const app = {
         const clickedElement = this;
         event.preventDefault();
 
-        //get page id from href attribute
         const id = clickedElement.getAttribute('href').replace('#', '');
-        //run thisApp.activatePage with that id
+
         thisApp.activatePage(id);
 
-        // change URL hash
         window.location.hash = '#/' + id;
       });
     }
